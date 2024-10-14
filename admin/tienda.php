@@ -13,18 +13,18 @@ switch($accion) {
         $data = $_POST['data'];
         $resultado = $app->create($data);
         if ($resultado) {
-            $mensaje = "El artículo se agregó correctamente a la tienda";
+            $mensaje = "La tienda se agrego correctamente";
             $tipo = "success";
         } else {
-            $mensaje = "Ocurrió un error al agregar el artículo";
+            $mensaje = "Ocurrió un error al agregar la tienda";
             $tipo = "danger";
         }
-        $ropaTienda = $app->readAll();
+        $tiendas = $app->readAll();
         include('views/tienda/index.php');
         break;
 
     case 'actualizar':
-        $ropaTienda = $app->readOne($id);
+        $tiendas = $app->readOne($id);
         include('views/tienda/crear.php');
         break;
 
@@ -32,33 +32,35 @@ switch($accion) {
         $data = $_POST['data'];
         $resultado = $app->update($id, $data);
         if ($resultado) {
-            $mensaje = "El artículo se modificó correctamente";
+            $mensaje = "La tienda se modificó correctamente";
             $tipo = "success";
         } else {
-            $mensaje = "Ocurrió un error al modificar el artículo";
+            $mensaje = "Ocurrió un error al modificar la tienda";
             $tipo = "danger";
         }
-        $ropaTienda = $app->readAll();
+        $tiendas = $app->readAll();
         include('views/tienda/index.php');
         break;
 
     case 'eliminar':
-        if (!is_null($id) && is_numeric($id)) {
-            $resultado = $app->delete($id);
-            if ($resultado) {
-                $mensaje = "Se eliminó exitosamente el artículo";
-                $tipo = "success";
-            } else {
-                $mensaje = "Hubo un problema con la eliminación";
-                $tipo = "danger";
+        if(!is_null($id)){
+            if(is_numeric($id)){
+                $resultado=$app->delete($id);
+                if($resultado){
+                    $mensaje="Se elimino exitosamente la tienda";
+                    $tipo="success";
+                }else{
+                    $mensaje="Hubo un problema con la eliminacion";
+                    $tipo="danger";
+                }
             }
         }
-        $ropaTienda = $app->readAll();
+        $tiendas = $app->readAll();
         include 'views/tienda/index.php';
         break;
 
     default:
-        $ropaTienda = $app->readAll();
+        $tiendas = $app->readAll();
         include 'views/tienda/index.php';
 }
 ?>
