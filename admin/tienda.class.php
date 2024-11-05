@@ -20,6 +20,7 @@ class tienda extends sistema {
         $this->conexion();
         $sql = "UPDATE tienda SET tienda = :tienda, direccion = :direccion, telefono = :telefono WHERE id_tienda = :id_tienda";
         $modificar = $this->con->prepare($sql);
+        $modificar->bindParam(':id_tienda', $id, PDO::PARAM_INT);
         $modificar->bindParam(':tienda', $data['tienda'], PDO::PARAM_STR);
         $modificar->bindParam(':direccion', $data['direccion'], PDO::PARAM_STR);
         $modificar->bindParam(':telefono', $data['telefono'], PDO::PARAM_STR);
