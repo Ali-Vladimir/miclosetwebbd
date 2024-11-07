@@ -24,7 +24,7 @@ switch($accion) {
         break;
 
     case 'actualizar':
-        $carrito = $app->readOne($id);
+        $carritos = $app->readOne($id);
         include('views/carrito/crear.php');
         break;
 
